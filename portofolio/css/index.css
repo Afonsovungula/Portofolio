@@ -83,11 +83,9 @@ body {
   }
   .blink { animation: blink 1s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-  @media (max-width: 600px) {
+@media (max-width: 768px) {
   body {
     align-items: flex-start;
-    min-height: 100vh;
     padding: 0;
   }
 
@@ -103,27 +101,37 @@ body {
   }
 
   #output {
-    font-size: 11px;
-    padding: 10px 10px;
+    font-size: 12px;
+    padding: 8px 12px;
+    word-break: normal;
+    overflow-x: hidden;
+  }
+
+  .line {
+    white-space: pre;
+    overflow-x: auto;
+    word-break: normal;
   }
 
   .input-prompt {
     font-size: 11px;
+    white-space: nowrap;
   }
 
   #cmd-input {
     font-size: 11px;
   }
 
+  #input-row {
+    padding: 8px 12px;
+  }
+
   .title-text {
     font-size: 10px;
+    letter-spacing: 0;
   }
 
   .boot-line {
     display: none;
-  }
-
-  .boot-mobile {
-    display: block !important;
   }
 }
