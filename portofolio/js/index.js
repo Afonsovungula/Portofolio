@@ -1,8 +1,20 @@
 const out = document.getElementById('output');
 const inp = document.getElementById('cmd-input');
+const isMobile = window.innerWidth <= 768;
 
 const data = {
   about: [
+    '  Nome    →  Afonso D. Vungula',
+    '  Role    →  Fullstack Developer',
+    '  Base    →  Luanda, Angola',
+    '  Foco    →  Mobile & Web Apps',
+    '',
+    '  Apaixonado por criar soluções',
+    '  reais para problemas reais.',
+    '  A construir o AgroSabi — app',
+    '  agrícola para Angola.',
+  ],
+  about_desktop: [
     '╔══════════════════════════════════════╗',
     '║         AFONSO D. VUNGULA           ║',
     '║      Fullstack Developer            ║',
@@ -19,6 +31,22 @@ const data = {
     '  para agricultores em Angola.',
   ],
   skills: [
+    '  FRONTEND',
+    '  React Native · Expo · TypeScript',
+    '  React.js · HTML · CSS · JS',
+    '',
+    '  BACKEND',
+    '  Node.js · Express · REST API',
+    '  MySQL · Railway',
+    '',
+    '  FERRAMENTAS',
+    '  Git · GitHub · Codespaces',
+    '  Postman · VS Code',
+    '',
+    '  AI / INTEGRAÇÃO',
+    '  Groq SDK · LLaMA · LLaVA',
+  ],
+  skills_desktop: [
     '  ┌─ FRONTEND ─────────────────────┐',
     '  │  React Native · Expo · TypeScript│',
     '  │  React.js · HTML · CSS · JS     │',
@@ -37,6 +65,18 @@ const data = {
     '  └─────────────────────────────────┘',
   ],
   projects: [
+    '  AGROSABI',
+    '  App agrícola para Angola',
+    '  React Native · Node.js · MySQL',
+    '  AgroChat · Pragas · Cronograma',
+    '  Status: Em desenvolvimento',
+    '',
+    '  PORTFOLIO TERMINAL',
+    '  Portfolio estilo terminal',
+    '  HTML · CSS · JavaScript',
+    '  Status: Concluído',
+  ],
+  projects_desktop: [
     '  ┌─ AGROSABI ─────────────────────────────────┐',
     '  │  App de assistência agrícola para Angola   │',
     '  │  Stack: React Native · Node.js · MySQL     │',
@@ -52,6 +92,12 @@ const data = {
     '  └────────────────────────────────────────────┘',
   ],
   social: [
+    '  GitHub   →  github.com/afonso',
+    '  LinkedIn →  linkedin.com/in/',
+    '             afonso-vungula',
+    '  Instagram→  @afonso.dev',
+  ],
+  social_desktop: [
     '  ┌─ REDES SOCIAIS ─────────────────┐',
     '  │                                 │',
     '  │  GitHub   →  github.com/afonso  │',
@@ -62,6 +108,14 @@ const data = {
     '  └─────────────────────────────────┘',
   ],
   contact: [
+    '  Email    →  afonso@email.com',
+    '  WhatsApp →  +244 9XX XXX XXX',
+    '  Luanda, Angola',
+    '',
+    '  Disponível para freelance',
+    '  e projetos colaborativos',
+  ],
+  contact_desktop: [
     '  ┌─ CONTACTO ──────────────────────┐',
     '  │                                 │',
     '  │  Email  →  afonso@email.com     │',
@@ -80,9 +134,9 @@ const help_text = [
   '',
   '  about      →  Quem é Afonso',
   '  skills     →  Stack técnico',
-  '  projectos   →  Projetos desenvolvidos',
+  '  projectos  →  Projetos',
   '  social     →  Redes sociais',
-  '  contactos  →  Entrar em contacto',
+  '  contactos  →  Contacto',
   '  clear      →  Limpar terminal',
   '  help       →  Ver esta lista',
   ''
@@ -95,7 +149,6 @@ const boot = [
   ' ██╔══██║ ██╔══╝  ██║   ██║██║╚████║╚════██║██║   ██║',
   ' ██║  ██║ ██║     ╚██████╔╝██║ ╚███║███████║╚██████╔╝',
   ' ╚═╝  ╚═╝ ╚═╝      ╚═════╝ ╚═╝  ╚══╝╚══════╝ ╚═════╝ ',
-
   '',
   '  Fullstack Developer · Luanda, Angola',
   '  ─────────────────────────────────────',
@@ -103,12 +156,15 @@ const boot = [
   '',
 ];
 
-
-
 let history = [];
 let histIdx = -1;
 
-function print(lines, cls='output-text') {
+function get(key) {
+  if (isMobile && data[key + '_desktop']) return data[key];
+  return data[key + '_desktop'] || data[key];
+}
+
+function print(lines, cls = 'output-text') {
   lines.forEach(l => {
     const d = document.createElement('div');
     d.className = 'line ' + cls;
@@ -119,25 +175,30 @@ function print(lines, cls='output-text') {
 }
 
 function printBoot() {
-  const asciiLines = boot.slice(0, 12);
-  const restLines = boot.slice(12);
-  let i = 0;
-
-  //para mobile 
-
-    const isMobile = window.innerWidth <= 600;
-
   if (isMobile) {
-    ['', '  AFONSO D. VUNGULA', '  Fullstack Developer · Luanda, Angola', '  ─────────────────────', ''].forEach(l => {
+    const mobileLines = [
+      '',
+      '  AFONSO D. VUNGULA',
+      '  Fullstack Developer',
+      '  Luanda, Angola',
+      '  ─────────────────────────',
+      '  Sistema iniciado.',
+      '  Digite "help" para começar.',
+      '',
+    ];
+    mobileLines.forEach(l => {
       const d = document.createElement('div');
-      d.className = 'line highlight boot-line boot-mobile';
-      d.style.display = 'block';
+      d.className = 'line highlight';
       d.textContent = l;
       out.appendChild(d);
     });
-    printRest(0);
+    out.scrollTop = out.scrollHeight;
     return;
   }
+
+  const asciiLines = boot.slice(0, 6);
+  const restLines = boot.slice(6);
+  let i = 0;
 
   function printAscii() {
     if (i < asciiLines.length) {
@@ -177,7 +238,7 @@ function printBoot() {
         clearInterval(interval);
         setTimeout(() => printRest(lineIdx + 1), 80);
       }
-    }, 50); // <- ajusta aqui (ms por caractere)
+    }, 50);
   }
 
   printAscii();
@@ -191,7 +252,7 @@ function printCmd(cmd) {
 }
 
 function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function run(cmd) {
@@ -202,16 +263,16 @@ function run(cmd) {
 
   if (c === 'clear') { out.innerHTML = ''; return; }
   if (c === 'help') { print(help_text); return; }
-  if (c === 'about') { print(data.about); return; }
-  if (c === 'skills') { print(data.skills); return; }
-  if (c === 'projectos') { print(data.projects); return; }
-  if (c === 'social') { print(data.social); return; }
-  if (c === 'contactos') { print(data.contact); return; }
+  if (c === 'about') { print(get('about')); return; }
+  if (c === 'skills') { print(get('skills')); return; }
+  if (c === 'projectos') { print(get('projects')); return; }
+  if (c === 'social') { print(get('social')); return; }
+  if (c === 'contactos') { print(get('contact')); return; }
   if (c === 'hello' || c === 'oi' || c === 'hi') {
     print(['  Olá! Bem-vindo ao meu portfolio.', '  Digite "help" para explorar. 👾']);
     return;
   }
-  print(['  Comando não reconhecido: "' + cmd + '"', '  Digite "help" para ver os comandos disponíveis.'], 'error');
+  print(['  Comando não reconhecido: "' + cmd + '"', '  Digite "help" para ver os comandos.'], 'error');
 }
 
 inp.addEventListener('keydown', e => {
