@@ -125,7 +125,7 @@ function printBoot() {
 
   //para mobile 
 
-  const isMobile = window.innerWidth <= 600;
+    const isMobile = window.innerWidth <= 600;
 
   if (isMobile) {
     ['', '  AFONSO D. VUNGULA', '  Fullstack Developer · Luanda, Angola', '  ─────────────────────────────────────', ''].forEach(l => {
@@ -136,6 +136,8 @@ function printBoot() {
       out.appendChild(d);
     });
     printRest(0);
+    return;
+  }
 
   function printAscii() {
     if (i < asciiLines.length) {
