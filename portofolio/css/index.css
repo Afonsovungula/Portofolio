@@ -83,3 +83,47 @@ body {
   }
   .blink { animation: blink 1s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  @media (max-width: 600px) {
+  body {
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  #terminal {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  #output {
+    font-size: 11px;
+    padding: 10px 10px;
+  }
+
+  .input-prompt {
+    font-size: 11px;
+  }
+
+  #cmd-input {
+    font-size: 11px;
+  }
+
+  .title-text {
+    font-size: 10px;
+  }
+
+  .boot-line {
+    display: none;
+  }
+
+  .boot-mobile {
+    display: block !important;
+  }
+}

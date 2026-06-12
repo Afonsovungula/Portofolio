@@ -123,6 +123,20 @@ function printBoot() {
   const restLines = boot.slice(12);
   let i = 0;
 
+  //para mobile 
+
+  const isMobile = window.innerWidth <= 600;
+
+  if (isMobile) {
+    ['', '  AFONSO D. VUNGULA', '  Fullstack Developer · Luanda, Angola', '  ─────────────────────────────────────', ''].forEach(l => {
+      const d = document.createElement('div');
+      d.className = 'line highlight boot-line boot-mobile';
+      d.style.display = 'block';
+      d.textContent = l;
+      out.appendChild(d);
+    });
+    printRest(0);
+
   function printAscii() {
     if (i < asciiLines.length) {
       const d = document.createElement('div');
