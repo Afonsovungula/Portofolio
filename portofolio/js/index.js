@@ -128,7 +128,7 @@ function printBoot() {
     const isMobile = window.innerWidth <= 600;
 
   if (isMobile) {
-    ['', '  AFONSO D. VUNGULA', '  Fullstack Developer · Luanda, Angola', '  ─────────────────────────────────────', ''].forEach(l => {
+    ['', '  AFONSO D. VUNGULA', '  Fullstack Developer · Luanda, Angola', '  ─────────────────────', ''].forEach(l => {
       const d = document.createElement('div');
       d.className = 'line highlight boot-line boot-mobile';
       d.style.display = 'block';
